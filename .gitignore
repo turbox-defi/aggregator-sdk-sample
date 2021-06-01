@@ -1,0 +1,9 @@
+/.secret
+/dist
+/node_modules
+/aggregator-sdk/node_modules
+/yarn.lock
+/128.graph
+/128.tokens.transfee
+/56.graph
+/56.tokens.transfee

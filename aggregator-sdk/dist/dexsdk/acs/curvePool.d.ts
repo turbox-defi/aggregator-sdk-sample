@@ -1,0 +1,58 @@
+import { BigNumber, BigNumberish } from "@ethersproject/bignumber";
+import { DexFactory } from "../../constants";
+import { Token } from "../entities";
+export declare class CurveBasePool {
+    balances: BigNumber[];
+    N_COINS: number;
+    MAX_COIN: number;
+    RATES: BigNumber[];
+    PRECISION: BigNumber;
+    PRECISION_MUL: BigNumberish[];
+    A: BigNumber;
+    A_PRECISION: number;
+    lp_token_totalSupply: BigNumber;
+    tokens: Token[];
+    fee: BigNumber;
+    FEE_DENOMINATOR: BigNumber;
+    constructor(A: BigNumberish, balances: BigNumber[], tokens: Token[], lp_token_totalSupply: BigNumber, fee: BigNumber);
+    protected _A(): BigNumber;
+    A_precise(): BigNumber;
+    protected _xp(): BigNumber[];
+    protected _xp_mem(_balances: BigNumber[]): BigNumber[];
+    protected get_D(xp: BigNumber[], amp: BigNumber): BigNumber;
+    protected get_D_mem(_balances: BigNumber[], amp: BigNumber): BigNumber;
+    get_virtual_price(): BigNumber;
+    calc_token_amount(amounts: BigNumber[], is_deposit: boolean): BigNumber;
+    get_dy(i: number, j: number, dx: BigNumber): BigNumber;
+    protected get_y(i: number, j: number, x: BigNumber, xp_: BigNumber[]): BigNumber;
+    calc_withdraw_one_coin(_token_amount: BigNumber, i: number): BigNumber;
+    protected _calc_withdraw_one_coin(_token_amount: BigNumber, i: number): BigNumber[];
+    protected get_y_D(A_: BigNumber, i: number, xp: BigNumber[], D: BigNumber): BigNumber;
+}
+export declare class CurvePool {
+    private base_virtual_price;
+    private RATES;
+    private N_COINS;
+    private MAX_COIN;
+    private BASE_N_COINS;
+    private PRECISION;
+    private PRECISION_MUL;
+    private balances;
+    private A;
+    private A_PRECISION;
+    private basePool;
+    private FEE_DENOMINATOR;
+    private fee;
+    constructor(basePool: CurveBasePool, A: BigNumber, balances: BigNumber[], tokens: Token[], fee: BigNumber);
+    static buildFromMultiDex(dexes: DexFactory[]): Promise<CurvePool[]>;
+    static buildFromDexFactory(dexFactory: DexFactory): Promise<CurvePool>;
+    private _vp_rate_ro;
+    protected _A(): BigNumber;
+    A_precise(): BigNumber;
+    protected get_D(xp: BigNumber[], amp: BigNumber): BigNumber;
+    protected get_D_mem(vp_rate: BigNumber, _balances: BigNumber[], amp: BigNumber): BigNumber;
+    protected _xp_mem(vp_rate: BigNumber, _balances: BigNumber[]): BigNumber[];
+    private _xp;
+    protected get_y(i: number, j: number, x: BigNumber, xp_: BigNumber[]): BigNumber;
+    get_dy_underlying(i: number, j: number, dx: BigNumber): BigNumber;
+}

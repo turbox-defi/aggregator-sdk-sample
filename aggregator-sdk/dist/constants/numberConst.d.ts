@@ -1,0 +1,10 @@
+import { Percent } from "../dexsdk";
+export declare const ONE_HUNDRED_PERCENT: Percent;
+export declare const PERCENT_05: Percent;
+export declare const PERCENT_02: Percent;
+export declare const PERCENT_025: Percent;
+export declare const PERCENT_03: Percent;
+export declare const PERCENT_035: Percent;
+export declare const PERCENT_2: Percent;
+export declare const PERCENT_1: Percent;
+export declare const PERCENT_3: Percent;
